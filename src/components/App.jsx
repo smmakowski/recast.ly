@@ -6,12 +6,13 @@ class App extends React.Component {
       videoList: window.exampleVideoData, // maybe change this later to accodmate dta fetched from server 
       currentVideo: window.exampleVideoData[0] //this.props.searchYoutube[0]
     };
+
     this.onVideoClick = this.onVideoClick.bind(this);
   }
 
-  onVideoClick() {
+  onVideoClick(video) {
     this.setState({
-      currentVideo: window.exampleVideoData[2]
+      currentVideo: video
     });
   }
 
