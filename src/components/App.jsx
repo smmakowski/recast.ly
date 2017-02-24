@@ -9,7 +9,6 @@ class App extends React.Component {
     };
 
     this.onVideoClick = this.onVideoClick.bind(this);
-    this.onSearchChange = this.onSearchChange.bind(this);
   }
 
   onVideoClick(video) {
@@ -18,16 +17,24 @@ class App extends React.Component {
     });
   }
 
-  onSearchChange(event) {
-    this.setState({
-      search: event
-    });
+  getYouTubeVideos(query) {
+    var options = {
+      key: this.props.API_KEY,
+      query: query
+    };
+
+    this.props.searchYouTube(options, (videos) =>
+      this.setState({
+        videos: videos,
+        currentVideo: videos[0]
+      })
+    );
   }
 
   render() {
     return (
       <div>
-        <Nav onSearchChange={this.onSearchChange}/>
+        <Nav handleSearchInputChange={this.getYouTubeVideos.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>

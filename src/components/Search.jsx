@@ -1,11 +1,11 @@
-var Search = (props) => {
-  var onSearchChange = () => {
-    props.onSearchChange(this.input.value);
-  };
+var Search = ({handleSearchInputChange}) => {
+  // var onSearchChange = () => {
+  //   props.onSearchChange();
+  // };
 
   return (
     <div className="search-bar form-inline">
-      <input className="form-control" type="text" ref={(input) => this.input = input} onChange={props.onSearchChange('onChange')}/>
+      <input className="form-control" type="text" onChange={(e) => handleSearchInputChange(e.target.value)}/>
       <button className="btn hidden-sm-down">
         <span className="glyphicon glyphicon-search"></span>
       </button>
