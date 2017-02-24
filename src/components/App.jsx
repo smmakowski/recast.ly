@@ -4,10 +4,12 @@ class App extends React.Component {
 
     this.state = {
       videoList: window.exampleVideoData, // maybe change this later to accodmate dta fetched from server 
-      currentVideo: window.exampleVideoData[0] //this.props.searchYoutube[0]
+      currentVideo: window.exampleVideoData[0],
+      search: 'sparky wheres satan' //this.props.searchYoutube[0]
     };
 
     this.onVideoClick = this.onVideoClick.bind(this);
+    this.onSearchChange = this.onSearchChange.bind(this);
   }
 
   onVideoClick(video) {
@@ -16,10 +18,16 @@ class App extends React.Component {
     });
   }
 
+  onSearchChange(event) {
+    this.setState({
+      search: event
+    });
+  }
+
   render() {
     return (
       <div>
-        <Nav />
+        <Nav onSearchChange={this.onSearchChange}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
@@ -28,6 +36,12 @@ class App extends React.Component {
         </div>
       </div>
     ); 
+  }
+
+  componentDidMount() {
+    this.props.searchYouTube({query: this.state.search, max: 5, key: window.YOUTUBE_API_KEY}, (videoList) => {
+      this.setState({videoList: videoList, currentVideo: videoList[0]});
+    });
   }
 }
 
