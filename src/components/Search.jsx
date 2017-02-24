@@ -6,8 +6,14 @@ var Search = ({handleSearchInputChange}) => {
   return (
     <div className="search-bar form-inline">
       <input className="form-control" type="text" onChange={(e) => handleSearchInputChange(e.target.value)}/>
-      <button className="btn hidden-sm-down">
-        <span className="glyphicon glyphicon-search"></span>
+      <button className="btn hidden-sm-down" onClick={
+        function() {
+          if ( window.autoplay === 1) {
+            window.autoplay = 0;
+          } else if (window.autoplay === 0) {
+            window.autoplay = 1;
+          } } }>
+        <span className="glyphicon glyphicon-search">Not a search thing(Autoplay Toggler); Autoplay changes will be reflected during next search</span>
       </button>
     </div>
   );
